@@ -16,9 +16,7 @@ let messageTimer;
 function countParagraphs(text) {
   const trimmed = text.trim();
   if (!trimmed) return 0;
-  return trimmed.split(/
-\s*
-+/).filter((paragraph) => paragraph.trim()).length;
+  return trimmed.split(/\n\s*\n+/).filter((paragraph) => paragraph.trim()).length;
 }
 
 function formatReadingTime(characterLength) {
@@ -36,9 +34,7 @@ function formatReadingTime(characterLength) {
 function getStats(text) {
   const characters = Array.from(text).length;
   const withoutSpaces = Array.from(text.replace(/\s/g, "")).length;
-  const lines = text.length === 0 ? 0 : text.split(/
-||
-/).length;
+  const lines = text.length === 0 ? 0 : text.split(/\r\n|\r|\n/).length;
   const paragraphs = countParagraphs(text);
   const manuscriptPages = withoutSpaces === 0 ? 0 : withoutSpaces / MANUSCRIPT_CHARACTERS;
 
@@ -81,8 +77,7 @@ async function copyResults() {
     `段落数：${stats.paragraphs.toLocaleString("ja-JP")}段落`,
     `原稿用紙：約${stats.manuscriptPages.toFixed(2)}枚`,
     `読了時間：約${stats.reading}`
-  ].join("
-");
+  ].join("\n");
 
   try {
     await navigator.clipboard.writeText(result);
