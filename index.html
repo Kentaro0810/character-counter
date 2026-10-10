@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="文字数、行数、段落数、原稿用紙換算、読了時間を確認できる文字数カウンター" />
+  <title>文字数カウンター</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="page-header">
+      <div>
+        <p class="badge">TEXT ANALYZER</p>
+        <h1>文字数カウンター</h1>
+        <p class="description">文章を入力すると、文字数や行数などをリアルタイムで確認できます。</p>
+      </div>
+      <a class="home-link" href="https://kentaro0810.github.io/secret-links/">リンク集へ戻る</a>
+    </header>
+
+    <section class="editor-card" aria-labelledby="editorTitle">
+      <div class="editor-heading">
+        <label id="editorTitle" for="textInput">文章を入力</label>
+        <span id="saveStatus" class="save-status" aria-live="polite">入力内容は保存されません</span>
+      </div>
+
+      <textarea
+        id="textInput"
+        placeholder="ここに文章を入力または貼り付けてください。"
+        spellcheck="true"
+        autofocus
+      ></textarea>
+
+      <div class="actions">
+        <button id="copyButton" class="primary-button" type="button">結果をコピー</button>
+        <button id="clearButton" class="secondary-button" type="button">入力をクリア</button>
+      </div>
+      <p id="actionMessage" class="action-message" aria-live="polite"></p>
+    </section>
+
+    <section class="stats-grid" aria-label="文章の分析結果">
+      <article class="stat-card main-stat">
+        <p class="stat-label">文字数</p>
+        <p id="characterCount" class="stat-value">0</p>
+        <p class="stat-note">改行を含む</p>
+      </article>
+
+      <article class="stat-card">
+        <p class="stat-label">空白を除く</p>
+        <p id="noSpaceCount" class="stat-value">0</p>
+        <p class="stat-note">空白・改行を除外</p>
+      </article>
+
+      <article class="stat-card">
+        <p class="stat-label">行数</p>
+        <p id="lineCount" class="stat-value">0</p>
+        <p class="stat-note">空の入力は0行</p>
+      </article>
+
+      <article class="stat-card">
+        <p class="stat-label">段落数</p>
+        <p id="paragraphCount" class="stat-value">0</p>
+        <p class="stat-note">空行で区切って計算</p>
+      </article>
+
+      <article class="stat-card">
+        <p class="stat-label">原稿用紙</p>
+        <p id="manuscriptCount" class="stat-value">0</p>
+        <p class="stat-note">400字詰め・小数第2位まで</p>
+      </article>
+
+      <article class="stat-card">
+        <p class="stat-label">読了時間</p>
+        <p id="readingTime" class="stat-value">0秒</p>
+        <p class="stat-note">1分あたり500文字で計算</p>
+      </article>
+    </section>
+
+    <section class="info-card">
+      <h2>数え方</h2>
+      <ul>
+        <li>「文字数」は、空白と改行を含めて数えます。</li>
+        <li>「空白を除く」は、半角・全角の空白、タブ、改行を除きます。</li>
+        <li>「段落数」は、1行以上の空行で区切られた文章のまとまりを数えます。</li>
+        <li>入力した文章はブラウザーやサーバーへ保存しません。</li>
+      </ul>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
